@@ -6,10 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
 
-import java.util.Date;
-
 import sabate.albert.todolist.Domain.DomainController;
-import sabate.albert.todolist.Exceptions.TagCreatorThrowable;
 import sabate.albert.todolist.R;
 
 public class MainActivity extends AppCompatActivity {
