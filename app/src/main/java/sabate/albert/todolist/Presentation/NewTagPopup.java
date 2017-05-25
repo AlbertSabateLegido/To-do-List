@@ -2,7 +2,6 @@ package sabate.albert.todolist.Presentation;
 
 import android.app.Dialog;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -18,9 +17,9 @@ import sabate.albert.todolist.R;
 public class NewTagPopup implements View.OnClickListener {
 
     private DomainController domainController;
-    private ArrayAdapter adapter;
+    private TagListAdapter adapter;
 
-    public NewTagPopup(DomainController domainController, ArrayAdapter adapter) {
+    public NewTagPopup(DomainController domainController, TagListAdapter adapter) {
         this.domainController = domainController;
         this.adapter = adapter;
     }
@@ -39,7 +38,7 @@ public class NewTagPopup implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 try {
-                    adapter.add(domainController.createTag(etName.getText().toString(), Calendar.getInstance().getTime(),null));
+                    adapter.addTag(domainController.createTag(etName.getText().toString(), Calendar.getInstance().getTime(),null));
                     newTagDialogue.cancel();
                 } catch (TagCreatorThrowable e) {
                     Toast.makeText(view.getContext(),"The name is empty",Toast.LENGTH_SHORT).show();
