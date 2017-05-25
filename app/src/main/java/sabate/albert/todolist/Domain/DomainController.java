@@ -4,11 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import sabate.albert.todolist.Exceptions.TagCreatorException;
-
-/**
- * Created by Albert on 25/05/2017.
- */
+import sabate.albert.todolist.Exceptions.TagCreatorThrowable;
 
 public class DomainController {
 
@@ -18,17 +14,17 @@ public class DomainController {
         tagList = new ArrayList<>();
     }
 
-    public String createTag(String name,Date dateOfCreation,Date dateLimit) throws TagCreatorException {
+    public String createTag(String name,Date dateOfCreation,Date dateLimit) throws TagCreatorThrowable {
         Tag tag = new Tag(name,dateOfCreation,dateLimit);
         tagList.add(tag);
         return tag.getName();
     }
 
     public List<String> getTagNames () {
-        List<String> tagList = new ArrayList<>();
+        List<String> tagNamesList = new ArrayList<>();
         for (Tag tag:this.tagList) {
-            tagList.add(tag.getName());
+            tagNamesList.add(tag.getName());
         }
-        return tagList;
+        return tagNamesList;
     }
 }

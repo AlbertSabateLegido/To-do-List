@@ -1,8 +1,6 @@
 package sabate.albert.todolist.Presentation;
 
 import android.app.Dialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,7 +13,7 @@ import android.widget.ListView;
 import java.util.Calendar;
 
 import sabate.albert.todolist.Domain.DomainController;
-import sabate.albert.todolist.Exceptions.TagCreatorException;
+import sabate.albert.todolist.Exceptions.TagCreatorThrowable;
 import sabate.albert.todolist.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
                         try {
                             adapter.add(domainController.createTag(etName.getText().toString(), Calendar.getInstance().getTime(),null));
                             newTagDialogue.cancel();
-                        } catch (TagCreatorException e) {
-                            System.out.println("NoNameException");
+                        } catch (TagCreatorThrowable e) {
+                            System.err.println("NoNameThrowable");
                             e.printStackTrace();
                         }
                     }

@@ -4,14 +4,10 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
 
-import sabate.albert.todolist.Exceptions.InvalidDateLimitException;
-import sabate.albert.todolist.Exceptions.NoNameException;
-import sabate.albert.todolist.Exceptions.TagCreatorException;
-import sabate.albert.todolist.Exceptions.NoDateOfCreationException;
-
-/**
- * Created by Albert on 24/05/2017.
- */
+import sabate.albert.todolist.Exceptions.InvalidDateLimitThrowable;
+import sabate.albert.todolist.Exceptions.NoNameThrowable;
+import sabate.albert.todolist.Exceptions.TagCreatorThrowable;
+import sabate.albert.todolist.Exceptions.NoDateOfCreationThrowable;
 
 public class Tag {
 
@@ -24,10 +20,13 @@ public class Tag {
     /* --- */
     private Date dateLimit;
 
-    public Tag(String name, Date dateOfCreation, Date dateLimit) throws TagCreatorException {
-        if(name == null || name.isEmpty()) throw new NoNameException();
-        if(dateOfCreation == null) throw new NoDateOfCreationException();
-        if(dateLimit != null && dateLimit.compareTo(Calendar.getInstance().getTime()) < 0) throw new InvalidDateLimitException();
+    public Tag(String name, Date dateOfCreation, Date dateLimit) throws TagCreatorThrowable {
+        if(name == null || name.isEmpty())
+            throw new NoNameThrowable();
+        if(dateOfCreation == null)
+            throw new NoDateOfCreationThrowable();
+        if(dateLimit != null && dateLimit.compareTo(Calendar.getInstance().getTime()) < 0)
+            throw new InvalidDateLimitThrowable();
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.dateOfCreation = dateOfCreation;
@@ -42,8 +41,9 @@ public class Tag {
         return name;
     }
 
-    public void setName(String name) throws NoNameException {
-        if(name == null || name.isEmpty()) throw new NoNameException();
+    public void setName(String name) throws NoNameThrowable {
+        if(name == null || name.isEmpty())
+            throw new NoNameThrowable();
         this.name = name;
     }
 
@@ -51,8 +51,9 @@ public class Tag {
         return dateOfCreation;
     }
 
-    public void setDateOfCreation(Date dateOfCreation) throws NoDateOfCreationException {
-        if(dateOfCreation == null) throw new NoDateOfCreationException();
+    public void setDateOfCreation(Date dateOfCreation) throws NoDateOfCreationThrowable {
+        if(dateOfCreation == null)
+            throw new NoDateOfCreationThrowable();
         this.dateOfCreation = dateOfCreation;
     }
 
@@ -60,8 +61,9 @@ public class Tag {
         return dateLimit;
     }
 
-    public void setDateLimit(Date dateLimit) throws InvalidDateLimitException {
-        if(dateLimit != null && dateLimit.compareTo(Calendar.getInstance().getTime()) < 0) throw new InvalidDateLimitException();
+    public void setDateLimit(Date dateLimit) throws InvalidDateLimitThrowable {
+        if(dateLimit != null && dateLimit.compareTo(Calendar.getInstance().getTime()) < 0)
+            throw new InvalidDateLimitThrowable();
         this.dateLimit = dateLimit;
     }
 

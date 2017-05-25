@@ -8,10 +8,10 @@ import java.util.Date;
 
 
 import sabate.albert.todolist.Domain.Tag;
-import sabate.albert.todolist.Exceptions.InvalidDateLimitException;
-import sabate.albert.todolist.Exceptions.NoDateOfCreationException;
-import sabate.albert.todolist.Exceptions.NoNameException;
-import sabate.albert.todolist.Exceptions.TagCreatorException;
+import sabate.albert.todolist.Exceptions.InvalidDateLimitThrowable;
+import sabate.albert.todolist.Exceptions.NoDateOfCreationThrowable;
+import sabate.albert.todolist.Exceptions.NoNameThrowable;
+import sabate.albert.todolist.Exceptions.TagCreatorThrowable;
 
 public class TagUnitTest {
 
@@ -19,49 +19,49 @@ public class TagUnitTest {
     private Calendar calendar;
 
     @Before
-    public void setUp() throws TagCreatorException {
+    public void setUp() throws TagCreatorThrowable {
         tag = new Tag("new",new Date(),null);
         calendar = Calendar.getInstance();
-        calendar.set(calendar.YEAR,calendar.MONTH,calendar.DATE-1);
+        calendar.set(Calendar.YEAR,Calendar.MONTH,Calendar.DATE-1);
     }
 
-    @Test (expected = NoNameException.class)
-    public void noNameTest() throws TagCreatorException {
+    @Test (expected = NoNameThrowable.class)
+    public void noNameTest() throws TagCreatorThrowable {
         new Tag("",new Date(),null);
     }
 
-    @Test (expected = NoNameException.class)
-    public void nullNameTest() throws TagCreatorException {
+    @Test (expected = NoNameThrowable.class)
+    public void nullNameTest() throws TagCreatorThrowable {
         new Tag(null,new Date(),null);
     }
 
-    @Test (expected = NoDateOfCreationException.class)
-    public void noDateOfCreationTest() throws TagCreatorException {
+    @Test (expected = NoDateOfCreationThrowable.class)
+    public void noDateOfCreationTest() throws TagCreatorThrowable {
         new Tag("new",null,null);
     }
 
-    @Test (expected = InvalidDateLimitException.class)
-    public void invalidDateLimitTest() throws TagCreatorException {
+    @Test (expected = InvalidDateLimitThrowable.class)
+    public void invalidDateLimitTest() throws TagCreatorThrowable {
         new Tag("new",new Date(),calendar.getTime());
     }
 
-    @Test (expected = NoNameException.class)
-    public void noNameOnSetTest() throws NoNameException {
+    @Test (expected = NoNameThrowable.class)
+    public void noNameOnSetTest() throws NoNameThrowable {
         tag.setName("");
     }
 
-    @Test (expected = NoNameException.class)
-    public void nullNameOnSetTest() throws NoNameException {
+    @Test (expected = NoNameThrowable.class)
+    public void nullNameOnSetTest() throws NoNameThrowable {
         tag.setName(null);
     }
 
-    @Test (expected = NoDateOfCreationException.class)
-    public void noDateOfCreationOnSetTest() throws NoDateOfCreationException {
+    @Test (expected = NoDateOfCreationThrowable.class)
+    public void noDateOfCreationOnSetTest() throws NoDateOfCreationThrowable {
         tag.setDateOfCreation(null);
     }
 
-    @Test (expected = InvalidDateLimitException.class)
-    public void invalidDateLimitOnSetTest() throws TagCreatorException {
+    @Test (expected = InvalidDateLimitThrowable.class)
+    public void invalidDateLimitOnSetTest() throws TagCreatorThrowable {
         tag.setDateLimit(calendar.getTime());
     }
 }
