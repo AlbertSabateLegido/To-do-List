@@ -15,11 +15,11 @@ import sabate.albert.todolist.Exceptions.NoDateOfCreationException;
 
 public class Tag {
 
-    /* primary key,not null and automaticly generated*/
+    /* primary key, not null and automatically generated */
     private String id;
-    /* not null*/
+    /* not null */
     private String name;
-    /* not null*/
+    /* not null */
     private Date dateOfCreation;
     /* --- */
     private Date dateLimit;

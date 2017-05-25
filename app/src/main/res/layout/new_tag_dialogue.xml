@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/appPadding">
+
+    <TextView
+        android:id="@+id/tvName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tag Name: "
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:textSize="@dimen/textSize"
+        android:textColor="@color/textColor"
+        android:gravity="center"
+        android:layout_alignBottom="@+id/etName" />
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_alignParentEnd="true"
+        android:layout_toEndOf="@+id/tvName" />
+
+    <Button
+        android:id="@+id/bAccept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Accept"
+        android:layout_below="@+id/tvName"
+        android:layout_marginTop="@dimen/buttonMargin"
+        android:layout_marginLeft="@dimen/buttonMargin"/>
+
+    <Button
+        android:id="@+id/bCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_alignBottom="@+id/bAccept"
+        android:layout_marginRight="@dimen/buttonMargin"
+        android:layout_alignParentEnd="true" />
+
+</RelativeLayout>
