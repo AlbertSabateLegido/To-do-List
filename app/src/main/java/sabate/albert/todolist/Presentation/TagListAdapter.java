@@ -17,12 +17,10 @@ import sabate.albert.todolist.R;
 public class TagListAdapter extends BaseAdapter implements ListAdapter {
 
     private List<Tag> tagList;
-    private Context context;
     private LayoutInflater layoutInflater;
 
     public TagListAdapter(Context context, List<Tag> tagList) {
         this.tagList = tagList;
-        this.context = context;
         layoutInflater = LayoutInflater.from(context);
     }
 

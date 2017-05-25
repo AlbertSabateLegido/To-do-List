@@ -25,12 +25,6 @@ public class MainActivity extends AppCompatActivity {
 
         domainController = DomainController.getInstance();
 
-        try {
-            domainController.createTag("prova",new Date(),null);
-        } catch (TagCreatorThrowable tagCreatorThrowable) {
-            tagCreatorThrowable.printStackTrace();
-        }
-
         mListView = (ListView) findViewById(R.id.list);
         adapter = new TagListAdapter(this,domainController.getTags());
         mListView.setAdapter(adapter);
