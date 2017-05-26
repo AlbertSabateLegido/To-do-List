@@ -2,6 +2,7 @@ package sabate.albert.todolist.Presentation;
 
 import android.app.Dialog;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ public class NewTagPopup implements View.OnClickListener {
     @Override
     public void onClick(View view) {
         final Dialog newTagDialogue = new Dialog(view.getContext(), android.R.style.Theme_DeviceDefault_Light_Dialog);
+        newTagDialogue.requestWindowFeature(Window.FEATURE_NO_TITLE);
         newTagDialogue.setContentView(R.layout.new_tag_dialogue);
         newTagDialogue.setCancelable(true);
         newTagDialogue.show();
