@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         domainController = DomainController.getInstance();
 
         mListView = (ListView) findViewById(R.id.list);
-        adapter = new TagListAdapter(this,domainController.getTags());
+        adapter = new TagListAdapter(domainController.getTags());
         mListView.setAdapter(adapter);
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.addTagButton);

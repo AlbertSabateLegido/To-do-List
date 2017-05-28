@@ -5,15 +5,23 @@ import java.util.Date;
 import java.util.List;
 
 import sabate.albert.todolist.Exceptions.TagCreatorThrowable;
+import sabate.albert.todolist.Persistence.DatabaseController;
 
 /* Singleton */
 public class DomainController {
 
     private static DomainController domainController;
+    private DatabaseController databaseController;
     private List<Tag> tagList;
 
     private DomainController() {
-        tagList = new ArrayList<>();
+        databaseController = new DatabaseController();
+        try {
+            tagList = databaseController.getTags();
+        } catch (TagCreatorThrowable tagCreatorThrowable) {
+            tagList = new ArrayList<>();
+            tagCreatorThrowable.printStackTrace();
+        }
     }
 
     public static DomainController getInstance() {
@@ -24,6 +32,7 @@ public class DomainController {
 
     public Tag createTag(String name,Date dateOfCreation,Date dateLimit) throws TagCreatorThrowable {
         Tag tag = new Tag(name,dateOfCreation,dateLimit);
+        databaseController.createTag(tag);
         tagList.add(tag);
         return tag;
     }

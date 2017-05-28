@@ -42,9 +42,9 @@ public class NewTagPopup implements View.OnClickListener {
                 try {
                     adapter.addTag(domainController.createTag(etName.getText().toString(), Calendar.getInstance().getTime(),null));
                     newTagDialogue.cancel();
-                } catch (TagCreatorThrowable e) {
+                } catch (TagCreatorThrowable tagCreatorThrowable) {
                     Toast.makeText(view.getContext(),"The name is empty",Toast.LENGTH_SHORT).show();
-                    e.printStackTrace();
+                    tagCreatorThrowable.printStackTrace();
                 }
             }
         });

@@ -10,6 +10,7 @@ import java.util.Date;
 import sabate.albert.todolist.Domain.Tag;
 import sabate.albert.todolist.Exceptions.InvalidDateLimitThrowable;
 import sabate.albert.todolist.Exceptions.NoDateOfCreationThrowable;
+import sabate.albert.todolist.Exceptions.NullIdThrowable;
 import sabate.albert.todolist.Exceptions.NoNameThrowable;
 import sabate.albert.todolist.Exceptions.TagCreatorThrowable;
 
@@ -63,5 +64,10 @@ public class TagUnitTest {
     @Test (expected = InvalidDateLimitThrowable.class)
     public void invalidDateLimitOnSetTest() throws TagCreatorThrowable {
         tag.setDateLimit(calendar.getTime());
+    }
+
+    @Test (expected = NullIdThrowable.class)
+    public void noIdOnSetTest() throws NullIdThrowable {
+        tag.setId(null);
     }
 }

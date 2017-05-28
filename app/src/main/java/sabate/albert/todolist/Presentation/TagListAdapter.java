@@ -1,6 +1,5 @@
 package sabate.albert.todolist.Presentation;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,15 +12,16 @@ import java.util.List;
 import sabate.albert.todolist.Domain.DomainController;
 import sabate.albert.todolist.Domain.Tag;
 import sabate.albert.todolist.R;
+import sabate.albert.todolist.Domain.ToDoList;
 
 public class TagListAdapter extends BaseAdapter implements ListAdapter {
 
     private List<Tag> tagList;
     private LayoutInflater layoutInflater;
 
-    public TagListAdapter(Context context, List<Tag> tagList) {
+    public TagListAdapter(List<Tag> tagList) {
         this.tagList = tagList;
-        layoutInflater = LayoutInflater.from(context);
+        layoutInflater = LayoutInflater.from(ToDoList.getContext());
     }
 
     public void addTag (Tag tag) {

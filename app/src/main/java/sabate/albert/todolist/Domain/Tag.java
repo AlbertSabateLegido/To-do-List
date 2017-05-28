@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.UUID;
 
 import sabate.albert.todolist.Exceptions.InvalidDateLimitThrowable;
+import sabate.albert.todolist.Exceptions.NullIdThrowable;
 import sabate.albert.todolist.Exceptions.NoNameThrowable;
 import sabate.albert.todolist.Exceptions.TagCreatorThrowable;
 import sabate.albert.todolist.Exceptions.NoDateOfCreationThrowable;
@@ -19,6 +20,8 @@ public class Tag {
     private Date dateOfCreation;
     /* --- */
     private Date dateLimit;
+
+    public Tag() {}
 
     public Tag(String name, Date dateOfCreation, Date dateLimit) throws TagCreatorThrowable {
         if(name == null || name.isEmpty())
@@ -35,6 +38,12 @@ public class Tag {
 
     public String getId() {
         return id;
+    }
+
+    public void setId(String id) throws NullIdThrowable {
+        if(id == null || id.isEmpty())
+            throw new NullIdThrowable();
+        this.id = id;
     }
 
     public String getName() {
