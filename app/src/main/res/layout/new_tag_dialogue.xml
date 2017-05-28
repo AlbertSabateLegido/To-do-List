@@ -34,7 +34,7 @@
         android:text="@string/accept"
         android:layout_below="@+id/tvName"
         android:layout_marginTop="@dimen/buttonMargin"
-        android:layout_marginLeft="@dimen/buttonMargin"/>
+        android:background="@drawable/button"/>
 
     <Button
         android:id="@+id/bCancel"
@@ -42,7 +42,7 @@
         android:layout_height="wrap_content"
         android:text="@string/cancel"
         android:layout_alignBottom="@+id/bAccept"
-        android:layout_marginRight="@dimen/buttonMargin"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/button"/>
 
 </RelativeLayout>

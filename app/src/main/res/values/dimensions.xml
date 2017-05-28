@@ -2,5 +2,5 @@
 <resources>
     <dimen name="appPadding"> 16dp </dimen>
     <dimen name="textSize"> 18sp </dimen>
-    <dimen name="buttonMargin"> 30dp </dimen>
+    <dimen name="buttonMargin"> 20dp </dimen>
 </resources>
