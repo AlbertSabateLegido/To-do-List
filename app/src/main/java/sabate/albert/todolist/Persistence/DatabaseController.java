@@ -29,13 +29,18 @@ public class DatabaseController {
         databaseHelper.close();
     }
 
-    public void createTag (Tag tag) {
+    /* generates the tag id */
+    public long createTag (Tag tag) {
         ContentValues values = new ContentValues();
 
-        values.put(MySQLiteHelper.COLUMN_ID,   tag.getId());
         values.put(MySQLiteHelper.COLUMN_NAME, tag.getName());
 
-        database.insert(MySQLiteHelper.TABLE_TAG, null, values);
+       return database.insert(MySQLiteHelper.TABLE_TAG, null, values);
+    }
+
+    public void deleteTag (Long tagId) {
+        database.delete(databaseHelper.TABLE_TAG,MySQLiteHelper.COLUMN_ID
+                + "=" + tagId,null);
     }
 
     public List<Tag> getTags() throws TagCreatorThrowable {
@@ -60,7 +65,7 @@ public class DatabaseController {
         for(int i = 0; i < cursor.getColumnCount(); i++) {
             switch (cursor.getColumnName(i)) {
                 case MySQLiteHelper.COLUMN_ID:
-                    tag.setId(cursor.getString(i));
+                    tag.setId(cursor.getLong(i));
                     break;
                 case MySQLiteHelper.COLUMN_NAME:
                     tag.setName(cursor.getString(i));

@@ -32,12 +32,13 @@ public class DomainController {
 
     public Tag createTag(String name,Date dateOfCreation,Date dateLimit) throws TagCreatorThrowable {
         Tag tag = new Tag(name,dateOfCreation,dateLimit);
-        databaseController.createTag(tag);
+        tag.setId(databaseController.createTag(tag));
         tagList.add(tag);
         return tag;
     }
 
     public void deleteTag(Tag tag) {
+        databaseController.deleteTag(tag.getId());
         tagList.remove(tag);
     }
 
