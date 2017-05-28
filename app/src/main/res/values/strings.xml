@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">To do List</string>
+    <string name="app_name"> To do List </string>
+
+    <!-- Toast strings -->
+    <string name="empty_name"> The name is empty </string>
+
+
+    <!-- Layout strings -->
+    <string name="tag_name"> Tag Name: </string>
+    <string name="accept"> Accept </string>
+    <string name="cancel"> Cancel </string>
+
 </resources>

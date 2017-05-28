@@ -20,6 +20,6 @@
         android:layout_alignBottom="@id/list"
         android:layout_alignEnd="@id/list"
         android:clickable="true"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        app:srcCompat="@drawable/ic_add" />
 
 </android.widget.RelativeLayout>
