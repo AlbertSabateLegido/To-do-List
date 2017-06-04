@@ -19,6 +19,8 @@ public class Tag {
     private Date dateOfCreation;
     /* --- */
     private Date dateLimit;
+    /* not null */
+    private Boolean done;
 
     public Tag() {}
 
@@ -33,6 +35,7 @@ public class Tag {
         this.name = name;
         this.dateOfCreation = dateOfCreation;
         this.dateLimit = dateLimit;
+        this.done = false;
     }
 
     public long getId() {
@@ -73,6 +76,15 @@ public class Tag {
         if(dateLimit != null && dateLimit.compareTo(Calendar.getInstance().getTime()) < 0)
             throw new InvalidDateLimitThrowable();
         this.dateLimit = dateLimit;
+    }
+
+    public Boolean getDone() {
+        return done;
+    }
+
+    public void setDone(Boolean done) {
+        if(done == null) done = false;
+        this.done = done;
     }
 
 }

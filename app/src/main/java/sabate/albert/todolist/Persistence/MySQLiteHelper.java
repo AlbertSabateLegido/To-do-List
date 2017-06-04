@@ -10,6 +10,7 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     public static final String TABLE_TAG = "tag";
     public static final String COLUMN_ID = "_id";
     public static final String COLUMN_NAME = "name";
+    public static final String COLUMN_DONE = "done";
 
     private static final String DATABASE_NAME = "tags.db";
     private static final int DATABASE_VERSION = 1;
@@ -17,7 +18,8 @@ public class MySQLiteHelper extends SQLiteOpenHelper {
     /* Database creation sql statement */
     private static final String DATABASE_CREATE = "CREATE TABLE " + TABLE_TAG + "( "
             + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-            + COLUMN_NAME + " TEXT NOT NULL "
+            + COLUMN_NAME + " TEXT NOT NULL, "
+            + COLUMN_DONE + " BOOLEAN NOT NULL "
             + ");";
 
     public MySQLiteHelper() {

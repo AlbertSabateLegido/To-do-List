@@ -67,7 +67,7 @@ public class TagUnitTest {
     }
 
     @Test (expected = NullIdThrowable.class)
-    public void noIdOnSetTest() throws NullIdThrowable {
+    public void nullIdOnSetTest() throws NullIdThrowable {
         tag.setId(null);
     }
 }

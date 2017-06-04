@@ -21,6 +21,24 @@ public class DatabaseController {
         open();
     }
 
+    private Tag cursorToTag(Cursor cursor) throws TagCreatorThrowable {
+        Tag tag = new Tag();
+        for(int i = 0; i < cursor.getColumnCount(); i++) {
+            switch (cursor.getColumnName(i)) {
+                case MySQLiteHelper.COLUMN_ID:
+                    tag.setId(cursor.getLong(i));
+                    break;
+                case MySQLiteHelper.COLUMN_NAME:
+                    tag.setName(cursor.getString(i));
+                    break;
+                case MySQLiteHelper.COLUMN_DONE:
+                    tag.setDone(cursor.getInt(i) > 0);
+                    break;
+            }
+        }
+        return tag;
+    }
+
     public void open() throws SQLException {
         database = databaseHelper.getWritableDatabase();
     }
@@ -34,6 +52,7 @@ public class DatabaseController {
         ContentValues values = new ContentValues();
 
         values.put(MySQLiteHelper.COLUMN_NAME, tag.getName());
+        values.put(MySQLiteHelper.COLUMN_DONE, tag.getDone());
 
        return database.insert(MySQLiteHelper.TABLE_TAG, null, values);
     }
@@ -41,6 +60,15 @@ public class DatabaseController {
     public void deleteTag (Long tagId) {
         database.delete(databaseHelper.TABLE_TAG,MySQLiteHelper.COLUMN_ID
                 + "=" + tagId,null);
+    }
+
+    public void setTagDone(long id, Boolean done) {
+        ContentValues values = new ContentValues();
+
+        values.put(databaseHelper.COLUMN_DONE,done);
+
+        database.update(databaseHelper.TABLE_TAG,values,
+                databaseHelper.COLUMN_DONE + " = " + id,null);
     }
 
     public List<Tag> getTags() throws TagCreatorThrowable {
@@ -58,20 +86,5 @@ public class DatabaseController {
 
         cursor.close();
         return tags;
-    }
-
-    private Tag cursorToTag(Cursor cursor) throws TagCreatorThrowable {
-        Tag tag = new Tag();
-        for(int i = 0; i < cursor.getColumnCount(); i++) {
-            switch (cursor.getColumnName(i)) {
-                case MySQLiteHelper.COLUMN_ID:
-                    tag.setId(cursor.getLong(i));
-                    break;
-                case MySQLiteHelper.COLUMN_NAME:
-                    tag.setName(cursor.getString(i));
-                    break;
-            }
-        }
-        return tag;
     }
 }

@@ -18,9 +18,9 @@ import sabate.albert.todolist.R;
 public class NewTagPopup implements View.OnClickListener {
 
     private DomainController domainController;
-    private TagListAdapter adapter;
+    private TagRecyclerViewAdapter adapter;
 
-    public NewTagPopup(DomainController domainController, TagListAdapter adapter) {
+    public NewTagPopup(DomainController domainController, TagRecyclerViewAdapter adapter) {
         this.domainController = domainController;
         this.adapter = adapter;
     }

@@ -42,7 +42,14 @@ public class DomainController {
         tagList.remove(tag);
     }
 
+    public void setTagDone(Tag tag, boolean done) {
+        tag.setDone(done);
+        databaseController.setTagDone(tag.getId(),tag.getDone());
+    }
+
     public List<Tag> getTags () {
         return tagList;
     }
+
+
 }
