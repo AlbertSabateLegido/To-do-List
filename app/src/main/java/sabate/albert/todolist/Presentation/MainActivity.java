@@ -40,6 +40,6 @@ public class MainActivity extends AppCompatActivity {
 
         FloatingActionButton floatingActionButton =
                 (FloatingActionButton) findViewById(R.id.addTagButton);
-        floatingActionButton.setOnClickListener(new NewTagPopup(domainController,adapter));
+        floatingActionButton.setOnClickListener(new NewTagPopup(domainController));
     }
 }

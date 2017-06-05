@@ -2,7 +2,6 @@ package sabate.albert.todolist.Presentation;
 
 import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,37 +18,26 @@ import sabate.albert.todolist.R;
 
 
 public class TagRecyclerViewAdapter extends
-        RecyclerView.Adapter<TagRecyclerViewAdapter.MyViewHolder> {
+        RecyclerView.Adapter<MyViewHolder> {
 
     private List<Tag> tagList;
-
-    public class MyViewHolder extends RecyclerView.ViewHolder {
-
-        public CardView cardView;
-        public RadioButton rbTag;
-        public Tag tag;
-
-        public MyViewHolder(View view) {
-            super(view);
-            cardView = (CardView) view.findViewById(R.id.card_view);
-            rbTag = (RadioButton) view.findViewById(R.id.rbTag);
-        }
-    }
 
     public TagRecyclerViewAdapter(List<Tag> tagList) {
         this.tagList = tagList;
     }
 
     private void strikeThroughRadioButton(MyViewHolder holder) {
-        holder.rbTag.setPaintFlags(holder.rbTag.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        holder.rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.secundaryTextColor));
-        holder.rbTag.setChecked(true);
+        RadioButton rbTag = holder.getRbTag();
+        rbTag.setPaintFlags(rbTag.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.secundaryTextColor));
+        rbTag.setChecked(true);
     }
 
     private void highlightRadioButton(MyViewHolder holder) {
-        holder.rbTag.setPaintFlags(holder.rbTag.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-        holder.rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.textColor));
-        holder.rbTag.setChecked(false);
+        RadioButton rbTag = holder.getRbTag();
+        rbTag.setPaintFlags(rbTag.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+        rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.textColor));
+        rbTag.setChecked(false);
     }
 
     @Override
@@ -64,12 +52,12 @@ public class TagRecyclerViewAdapter extends
     public void onBindViewHolder(final MyViewHolder holder, int position) {
         final Tag tag = tagList.get(position);
 
-        holder.tag = tagList.get(position);
+        if(tag.getDone())
+            strikeThroughRadioButton(holder);
 
-        if(tag.getDone()) strikeThroughRadioButton(holder);
-
-        holder.rbTag.setText(tag.getName());
-        holder.rbTag.setOnClickListener(new View.OnClickListener() {
+        RadioButton rbTag = holder.getRbTag();
+        rbTag.setText(tag.getName());
+        rbTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (tag.getDone()) {

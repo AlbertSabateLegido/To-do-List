@@ -83,7 +83,6 @@ public class Tag {
     }
 
     public void setDone(Boolean done) {
-        if(done == null) done = false;
         this.done = done;
     }
 
