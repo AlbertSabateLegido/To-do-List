@@ -68,7 +68,7 @@ public class DatabaseController {
         values.put(databaseHelper.COLUMN_DONE,done);
 
         database.update(databaseHelper.TABLE_TAG,values,
-                databaseHelper.COLUMN_DONE + " = " + id,null);
+                databaseHelper.COLUMN_ID + " = " + id,null);
     }
 
     public List<Tag> getTags() throws TagCreatorThrowable {

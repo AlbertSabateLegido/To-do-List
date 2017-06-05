@@ -2,6 +2,7 @@ package sabate.albert.todolist.Presentation;
 
 import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,21 +21,33 @@ public class TagRecyclerViewAdapter extends RecyclerView.Adapter<TagRecyclerView
 
     private List<Tag> tagList;
 
-
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
+        public CardView cardView;
         public RadioButton rbTag;
         public Tag tag;
 
         public MyViewHolder(View view) {
             super(view);
+            cardView = (CardView) view.findViewById(R.id.card_view);
             rbTag = (RadioButton) view.findViewById(R.id.rbTag);
         }
     }
 
     public TagRecyclerViewAdapter(List<Tag> tagList) {
         this.tagList = tagList;
+    }
+
+    private void strikethroughRadioButton(MyViewHolder holder) {
+        holder.rbTag.setPaintFlags(holder.rbTag.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
+        holder.rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.secundaryTextColor));
+        holder.rbTag.setChecked(true);
+    }
+
+    private void highlightRadioButton(MyViewHolder holder) {
+        holder.rbTag.setPaintFlags(holder.rbTag.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
+        holder.rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.textColor));
+        holder.rbTag.setChecked(false);
     }
 
     @Override
@@ -51,20 +64,19 @@ public class TagRecyclerViewAdapter extends RecyclerView.Adapter<TagRecyclerView
 
         holder.tag = tagList.get(position);
 
+        if(tag.getDone()) strikethroughRadioButton(holder);
+
         holder.rbTag.setText(tag.getName());
         holder.rbTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (tag.getDone()) {
                     DomainController.getInstance().setTagDone(tag, false);
-                    holder.rbTag.setPaintFlags(holder.rbTag.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-                    holder.rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.textColor));
-                    holder.rbTag.setChecked(false);
-                } else {
+                    highlightRadioButton(holder);
+                }
+                else {
                     DomainController.getInstance().setTagDone(tag, true);
-                    holder.rbTag.setPaintFlags(holder.rbTag.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-                    holder.rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.secundaryTextColor));
-                    holder.rbTag.setChecked(true);
+                    strikethroughRadioButton(holder);
                 }
             }
         });

@@ -2,15 +2,25 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <RadioButton
-        android:id="@+id/rbTag"
-        android:layout_width="wrap_content"
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_margin="@dimen/appPadding"
-        android:text="Tag Name"
-        android:textSize="@dimen/textSize"
-        android:textColor="@color/textColor"/>
+        android:layout_margin="5dp"
+        android:id="@+id/card_view"
+        card_view:cardCornerRadius="5dp">
+
+        <RadioButton
+            android:id="@+id/rbTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_margin="@dimen/appPadding"
+            android:text="Tag Name"
+            android:textColor="@color/textColor"
+            android:textSize="@dimen/textSize" />
+
+    </android.support.v7.widget.CardView>
 
 </RelativeLayout>
