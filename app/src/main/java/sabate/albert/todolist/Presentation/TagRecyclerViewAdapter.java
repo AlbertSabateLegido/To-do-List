@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
 
+import java.util.Collections;
 import java.util.List;
 
 import sabate.albert.todolist.Domain.DomainController;
@@ -17,7 +18,8 @@ import sabate.albert.todolist.Domain.ToDoList;
 import sabate.albert.todolist.R;
 
 
-public class TagRecyclerViewAdapter extends RecyclerView.Adapter<TagRecyclerViewAdapter.MyViewHolder> {
+public class TagRecyclerViewAdapter extends
+        RecyclerView.Adapter<TagRecyclerViewAdapter.MyViewHolder> {
 
     private List<Tag> tagList;
 
@@ -38,7 +40,7 @@ public class TagRecyclerViewAdapter extends RecyclerView.Adapter<TagRecyclerView
         this.tagList = tagList;
     }
 
-    private void strikethroughRadioButton(MyViewHolder holder) {
+    private void strikeThroughRadioButton(MyViewHolder holder) {
         holder.rbTag.setPaintFlags(holder.rbTag.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
         holder.rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.secundaryTextColor));
         holder.rbTag.setChecked(true);
@@ -64,7 +66,7 @@ public class TagRecyclerViewAdapter extends RecyclerView.Adapter<TagRecyclerView
 
         holder.tag = tagList.get(position);
 
-        if(tag.getDone()) strikethroughRadioButton(holder);
+        if(tag.getDone()) strikeThroughRadioButton(holder);
 
         holder.rbTag.setText(tag.getName());
         holder.rbTag.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +78,7 @@ public class TagRecyclerViewAdapter extends RecyclerView.Adapter<TagRecyclerView
                 }
                 else {
                     DomainController.getInstance().setTagDone(tag, true);
-                    strikethroughRadioButton(holder);
+                    strikeThroughRadioButton(holder);
                 }
             }
         });
@@ -87,8 +89,22 @@ public class TagRecyclerViewAdapter extends RecyclerView.Adapter<TagRecyclerView
         return tagList.size();
     }
 
-    public void addTag(Tag tag) {
-        tagList.add(tag);
+    public void onItemMove(int fromPosition, int toPosition) {
+        if (fromPosition < toPosition) {
+            for (int i = fromPosition; i < toPosition; i++) {
+                Collections.swap(tagList, i, i + 1);
+            }
+        } else {
+            for (int i = fromPosition; i > toPosition; i--) {
+                Collections.swap(tagList, i, i - 1);
+            }
+        }
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    public void onItemDismiss(int position) {
+        DomainController.getInstance().deleteTag(tagList.get(position));
+        notifyItemRemoved(position);
     }
 }
 

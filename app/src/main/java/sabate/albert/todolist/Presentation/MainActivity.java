@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 
 
 import sabate.albert.todolist.Domain.DomainController;
@@ -33,7 +34,12 @@ public class MainActivity extends AppCompatActivity {
         adapter = new TagRecyclerViewAdapter(domainController.getTags());
         mRecyclerView.setAdapter(adapter);
 
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.addTagButton);
+        ItemTouchHelper.Callback callback = new MyItemTouchHelperCallback(adapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(callback);
+        touchHelper.attachToRecyclerView(mRecyclerView);
+
+        FloatingActionButton floatingActionButton =
+                (FloatingActionButton) findViewById(R.id.addTagButton);
         floatingActionButton.setOnClickListener(new NewTagPopup(domainController,adapter));
     }
 }

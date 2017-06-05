@@ -40,7 +40,7 @@ public class NewTagPopup implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 try {
-                    adapter.addTag(domainController.createTag(etName.getText().toString(), Calendar.getInstance().getTime(),null));
+                    domainController.createTag(etName.getText().toString(), Calendar.getInstance().getTime(),null);
                     newTagDialogue.cancel();
                 } catch (TagCreatorThrowable tagCreatorThrowable) {
                     Toast.makeText(view.getContext(),R.string.empty_name,Toast.LENGTH_SHORT).show();
