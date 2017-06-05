@@ -5,7 +5,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import sabate.albert.todolist.Domain.Tag;
@@ -31,6 +33,14 @@ public class DatabaseController {
                 case MySQLiteHelper.COLUMN_NAME:
                     tag.setName(cursor.getString(i));
                     break;
+                case MySQLiteHelper.COLUMN_CREATION_DATE:
+                    try {
+                        tag.setDateOfCreation(databaseHelper.stringToDate(cursor.getString(i)));
+                    } catch (ParseException e) {
+                        tag.setDateOfCreation(Calendar.getInstance().getTime());
+                        e.printStackTrace();
+                    }
+                    break;
                 case MySQLiteHelper.COLUMN_DONE:
                     tag.setDone(cursor.getInt(i) > 0);
                     break;
@@ -52,6 +62,8 @@ public class DatabaseController {
         ContentValues values = new ContentValues();
 
         values.put(MySQLiteHelper.COLUMN_NAME, tag.getName());
+        values.put(MySQLiteHelper.COLUMN_CREATION_DATE,
+                databaseHelper.dateToString(tag.getDateOfCreation()));
         values.put(MySQLiteHelper.COLUMN_DONE, tag.getDone());
 
        return database.insert(MySQLiteHelper.TABLE_TAG, null, values);

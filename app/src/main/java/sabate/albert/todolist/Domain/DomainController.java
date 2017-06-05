@@ -38,8 +38,8 @@ public class DomainController {
     }
 
     public void deleteTag(Tag tag) {
-        databaseController.deleteTag(tag.getId());
         tagList.remove(tag);
+        databaseController.deleteTag(tag.getId());
     }
 
     public void setTagDone(Tag tag, boolean done) {
