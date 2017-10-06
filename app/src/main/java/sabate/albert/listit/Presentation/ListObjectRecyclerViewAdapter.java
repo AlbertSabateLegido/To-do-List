@@ -1,4 +1,4 @@
-package sabate.albert.todolist.Presentation;
+package sabate.albert.listit.Presentation;
 
 import android.graphics.Paint;
 import android.support.v4.content.ContextCompat;
@@ -11,61 +11,61 @@ import android.widget.RadioButton;
 import java.util.Collections;
 import java.util.List;
 
-import sabate.albert.todolist.Domain.DomainController;
-import sabate.albert.todolist.Domain.Tag;
-import sabate.albert.todolist.Domain.ToDoList;
-import sabate.albert.todolist.R;
+import sabate.albert.listit.Domain.DomainController;
+import sabate.albert.listit.Domain.ListObject;
+import sabate.albert.listit.Domain.ListIt;
+import sabate.albert.listit.R;
 
 
-public class TagRecyclerViewAdapter extends
+public class ListObjectRecyclerViewAdapter extends
         RecyclerView.Adapter<MyViewHolder> {
 
-    private List<Tag> tagList;
+    private List<ListObject> listObjectList;
 
-    public TagRecyclerViewAdapter(List<Tag> tagList) {
-        this.tagList = tagList;
+    public ListObjectRecyclerViewAdapter(List<ListObject> listObjectList) {
+        this.listObjectList = listObjectList;
     }
 
     private void strikeThroughRadioButton(MyViewHolder holder) {
-        RadioButton rbTag = holder.getRbTag();
+        RadioButton rbTag = holder.getRbListObject();
         rbTag.setPaintFlags(rbTag.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.secundaryTextColor));
+        rbTag.setTextColor(ContextCompat.getColor(ListIt.getContext(), R.color.secundaryTextColor));
         rbTag.setChecked(true);
     }
 
     private void highlightRadioButton(MyViewHolder holder) {
-        RadioButton rbTag = holder.getRbTag();
+        RadioButton rbTag = holder.getRbListObject();
         rbTag.setPaintFlags(rbTag.getPaintFlags() & (~Paint.STRIKE_THRU_TEXT_FLAG));
-        rbTag.setTextColor(ContextCompat.getColor(ToDoList.getContext(), R.color.textColor));
+        rbTag.setTextColor(ContextCompat.getColor(ListIt.getContext(), R.color.textColor));
         rbTag.setChecked(false);
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.tag_row, parent, false);
+                .inflate(R.layout.list_object_row, parent, false);
 
         return new MyViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, int position) {
-        final Tag tag = tagList.get(position);
+        final ListObject listObject = listObjectList.get(position);
 
-        if(tag.getDone())
+        if(listObject.getDone())
             strikeThroughRadioButton(holder);
 
-        RadioButton rbTag = holder.getRbTag();
-        rbTag.setText(tag.getName());
+        RadioButton rbTag = holder.getRbListObject();
+        rbTag.setText(listObject.getName());
         rbTag.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (tag.getDone()) {
-                    DomainController.getInstance().setTagDone(tag, false);
+                if (listObject.getDone()) {
+                    DomainController.getInstance().setListObjectDone(listObject, false);
                     highlightRadioButton(holder);
                 }
                 else {
-                    DomainController.getInstance().setTagDone(tag, true);
+                    DomainController.getInstance().setListObjectDone(listObject, true);
                     strikeThroughRadioButton(holder);
                 }
             }
@@ -74,24 +74,24 @@ public class TagRecyclerViewAdapter extends
 
     @Override
     public int getItemCount() {
-        return tagList.size();
+        return listObjectList.size();
     }
 
     public void onItemMove(int fromPosition, int toPosition) {
         if (fromPosition < toPosition) {
             for (int i = fromPosition; i < toPosition; i++) {
-                Collections.swap(tagList, i, i + 1);
+                Collections.swap(listObjectList, i, i + 1);
             }
         } else {
             for (int i = fromPosition; i > toPosition; i--) {
-                Collections.swap(tagList, i, i - 1);
+                Collections.swap(listObjectList, i, i - 1);
             }
         }
         notifyItemMoved(fromPosition, toPosition);
     }
 
     public void onItemDismiss(int position) {
-        DomainController.getInstance().deleteTag(tagList.get(position));
+        DomainController.getInstance().deleteListObject(listObjectList.get(position));
         notifyItemRemoved(position);
     }
 }

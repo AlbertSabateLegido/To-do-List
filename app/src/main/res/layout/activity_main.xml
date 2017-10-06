@@ -5,19 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <android.support.design.widget.FloatingActionButton
-        android:id="@+id/addTagButton"
+        android:id="@+id/addListObjectButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/appPadding"
+        android:layout_margin="@dimen/appMargin"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
         android:clickable="true"
         app:srcCompat="@drawable/ic_add" />
+
+    <EditText
+        android:id="@+id/addListObjectInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/addListObjectButton"
+        android:layout_alignTop="@+id/addListObjectButton"
+        android:layout_toLeftOf="@+id/addListObjectButton"
+        android:layout_marginLeft="@dimen/appMargin"
+        android:padding="@dimen/appPadding"
+        android:background="@drawable/input"/>
 
 </android.widget.RelativeLayout>

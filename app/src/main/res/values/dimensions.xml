@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="appPadding"> 16dp </dimen>
+    <dimen name="appMargin"> 16dp </dimen>
+    <dimen name="appPadding"> 8dp </dimen>
     <dimen name="textSize"> 18sp </dimen>
     <dimen name="buttonMargin"> 20dp </dimen>
 </resources>

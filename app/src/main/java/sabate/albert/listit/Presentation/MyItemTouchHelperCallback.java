@@ -1,13 +1,13 @@
-package sabate.albert.todolist.Presentation;
+package sabate.albert.listit.Presentation;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 public class MyItemTouchHelperCallback extends ItemTouchHelper.Callback {
 
-    TagRecyclerViewAdapter adapter;
+    ListObjectRecyclerViewAdapter adapter;
 
-    public MyItemTouchHelperCallback(TagRecyclerViewAdapter adapter) {
+    public MyItemTouchHelperCallback(ListObjectRecyclerViewAdapter adapter) {
         this.adapter = adapter;
     }
 

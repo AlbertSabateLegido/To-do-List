@@ -1,0 +1,5 @@
+projectKey=toDoList
+serverUrl=http://localhost:9000
+dashboardUrl=http://localhost:9000/dashboard/index/toDoList
+ceTaskId=AV0C1hzV1ASF34EtIgy4
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AV0C1hzV1ASF34EtIgy4

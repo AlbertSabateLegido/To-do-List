@@ -1,4 +1,4 @@
-package sabate.albert.todolist.Presentation;
+package sabate.albert.listit.Presentation;
 
 
 import android.support.design.widget.FloatingActionButton;
@@ -9,14 +9,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
 
-import sabate.albert.todolist.Domain.DomainController;
-import sabate.albert.todolist.R;
+import sabate.albert.listit.Domain.DomainController;
+import sabate.albert.listit.R;
 
 public class MainActivity extends AppCompatActivity {
 
     private DomainController domainController;
     private RecyclerView mRecyclerView;
-    private TagRecyclerViewAdapter adapter;
+    private ListObjectRecyclerViewAdapter adapter;
     private LinearLayoutManager mLayoutManager;
 
     @Override
@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         mLayoutManager = new LinearLayoutManager(this);
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        adapter = new TagRecyclerViewAdapter(domainController.getTags());
+        adapter = new ListObjectRecyclerViewAdapter(domainController.getListObjects());
         mRecyclerView.setAdapter(adapter);
 
         ItemTouchHelper.Callback callback = new MyItemTouchHelperCallback(adapter);
@@ -39,7 +39,8 @@ public class MainActivity extends AppCompatActivity {
         touchHelper.attachToRecyclerView(mRecyclerView);
 
         FloatingActionButton floatingActionButton =
-                (FloatingActionButton) findViewById(R.id.addTagButton);
-        floatingActionButton.setOnClickListener(new NewTagPopup(domainController));
+                (FloatingActionButton) findViewById(R.id.addListObjectButton);
+        floatingActionButton.setOnClickListener(new NewListObjectListener(this));
+
     }
 }
